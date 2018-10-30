@@ -18,7 +18,7 @@ Module.register("MMM-Weather-SMHI", {
 		useBeaufort: true,
 		units:
 			config.units,
-		maxNumberOfDays: 7,
+		maxNumberOfDays: 5,
 		updateInterval:
 			10 *
 			60 *
@@ -684,8 +684,10 @@ Module.register("MMM-Weather-SMHI", {
 				item.time.diff(
 					moment(),
 					"days"
-				) >
-				4
+				) >=
+				this
+					.config
+					.maxNumberOfDays
 			) {
 				break;
 			}
