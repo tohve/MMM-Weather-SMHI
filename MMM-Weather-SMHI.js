@@ -30,6 +30,7 @@ Module.register("MMM-Weather-SMHI", {
 			config.language,
 		fade: true,
 		fadePoint: 0.25, // Start on 1/4th of the list.
+		tempDecimals: 1,
 		title:
 			"Weather Forecast",
 
@@ -1077,7 +1078,9 @@ Module.register("MMM-Weather-SMHI", {
 		return parseFloat(
 			value
 		).toFixed(
-			1
+			this
+				.config
+				.tempDecimals
 		);
 	}
 });
