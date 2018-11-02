@@ -8,95 +8,142 @@
  */
 
 Module.register("MMM-Weather-SMHI", {
-	// Default module config.
+
+	// Default module config
 	defaults: {
+		
+		// Where and how to get the weather data
 		url:
-			"http://opendata-download-metfcst.smhi.se/api/category/pmp2g/version/2/geotype/point/lon/%s/lat/%s/data.json",
+			"http://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/%s/lat/%s/data.json",
 		lon: 0,
 		lat: 0,
-
-		useBeaufort: true,
-		units:
-			config.units,
-		maxNumberOfDays: 5,
-		updateInterval:
-			10 *
-			60 *
-			1000, // every 10 minutes
-		animationSpeed: 1000,
-		timeFormat:
-			config.timeFormat,
-		lang:
-			config.language,
-		fade: true,
-		fadePoint: 0.25, // Start on 1/4th of the list.
-		tempDecimals: 1,
-		title:
-			"Weather Forecast",
-
-		initialLoadDelay: 2500, // 2.5 seconds delay. This delay is used to keep the OpenWeather API happy.
+		
+		// Timing
+		updateInterval: 10 * 60 * 1000,	// every 10 minutes
+		initialLoadDelay: 2500, 		// 2.5 seconds delay.
 		retryDelay: 2500,
 
+		units:		config.units,
+		timeFormat:	config.timeFormat,
+		lang:		config.language,
+
+		// Visual configuration
+		title:				"Weather Forecast",
+		showWindDirection:	false,
+		maxNumberOfDays:	5,
+		fade:				true,
+		fadePoint:			0.25, // Start on 1/4th of the list.
+		animationSpeed:		1000, // 1 second
+		
+		// Mapping of SMHI Wsymb to an actual weather icon
 		iconTable: {
-			1: [
-				"sky wi-day-sunny",
+			1: [	// SMHI: Clear sky
+				"wi-day-sunny",
 				"wi-night-clear"
-			],
-			2: [
-				"sky wi-day-cloudy",
+			],			
+			2: [	// SMHI: Nearly clear sky
+				"wi-day-sunny-overcast",
 				"wi-night-partly-cloudy"
 			],
-			3: [
+			3: [	// SMHI: Variable cloudness
 				"wi-day-cloudy",
 				"wi-night-alt-cloudy"
 			],
-			4: [
-				"wi-day-cloudy-high",
+			4: [	// SMHI: Halfclear sky
+				"wi-day-cloudy",
 				"wi-night-alt-cloudy"
 			],
-			5: [
+			5: [	// SMHI: Cloudy sky
 				"wi-day-cloudy",
-				"wi-night-cloudy"
+				"wi-night-alt-cloudy"
 			],
-			6: [
-				"wi-day-sleet",
-				"wi-night-alt-sleet"
+			6: [	// SMHI: Overcast
+				"wi-cloudy",
+				"wi-cloudy"
 			],
-			7: [
+			7: [	// SMHI: Fog
 				"wi-day-fog",
 				"wi-night-fog"
 			],
-			8: [
+			8: [	// SMHI: Light rain showers
 				"wi-day-showers",
 				"wi-night-alt-showers"
 			],
-			9: [
-				"wi-day-lightning",
-				"wi-night-alt-lightning"
+			9: [	// SMHI: Moderate rain showers
+				"wi-day-showers",
+				"wi-night-alt-showers"
 			],
-			10: [
+			10: [	// SMHI: Heavy rain showers
+				"wi-day-showers",
+				"wi-night-alt-showers"
+			],
+			11: [	// SMHI: Thunderstorm
+				"wi-day-thunderstorm",
+				"wi-night-alt-thunderstorm"
+			],
+			12: [	// SMHI: Light sleet showers
 				"wi-day-sleet",
 				"wi-night-alt-sleet"
 			],
-			11: [
-				"wi-day-snow",
-				"wi-night-snow"
-			],
-			12: [
-				"wi-day-rain",
-				"wi-night-rain"
-			],
-			13: [
-				"wi-day-lightning",
-				"wi-night-lightning"
-			],
-			14: [
-				"wi-day-snow",
+			13: [	// SMHI: Moderate sleet showers
+				"wi-day-sleet",
 				"wi-night-alt-sleet"
 			],
-			15: [
+			14: [	// SMHI: Heavy sleet showers
+				"wi-day-sleet",
+				"wi-night-alt-sleet"
+			],
+			15: [	// SMHI: Light snow showers
 				"wi-day-snow",
-				"wi-night-snow"
+				"wi-night-alt-snow"
+			],
+			16: [	// SMHI: Moderate snow showers
+				"wi-day-snow",
+				"wi-night-alt-snow"
+			],
+			17: [	// SMHI: Heavy snow showers
+				"wi-day-snow",
+				"wi-night-alt-snow"
+			],
+			18: [	// SMHI: Light rain
+				"wi-day-rain",
+				"wi-night-alt-rain"
+			],
+			19: [	// SMHI: Moderate rain
+				"wi-day-rain",
+				"wi-night-alt-rain"
+			],
+			20: [	// SMHI: Heavy rain
+				"wi-day-rain",
+				"wi-night-alt-rain"
+			],
+			21: [	// SMHI: Thunder
+				"wi-day-lightning",
+				"wi-night-alt-lightning"
+			],
+			22: [	// SMHI: Light sleet
+				"wi-day-sleet",
+				"wi-night-alt-sleet"
+			],
+			23: [	// SMHI: Moderate sleet
+				"wi-day-sleet",
+				"wi-night-alt-sleet"
+			],
+			24: [	// SMHI: Heavy sleet
+				"wi-day-sleet",
+				"wi-night-alt-sleet"
+			],
+			25: [	// SMHI: Light snowfall
+				"wi-day-snow",
+				"wi-night-alt-snow"
+			],
+			26: [	// SMHI: Moderate snowfall
+				"wi-day-snow",
+				"wi-night-alt-snow"
+			],
+			27: [	// SMHI: Heavy snowfall
+				"wi-day-snow",
+				"wi-night-alt-snow"
 			]
 		}
 	},
@@ -108,10 +155,11 @@ Module.register("MMM-Weather-SMHI", {
 		];
 	},
 
-	// Define required scripts.
+	// Define required styles.
 	getStyles: function() {
 		return [
 			"weather-icons.css",
+			"weather-icons-wind.css",
 			"MMM-Weather-SMHI.css"
 		];
 	},
@@ -122,28 +170,6 @@ Module.register("MMM-Weather-SMHI", {
 		// Therefor we can just return false. Otherwise we should have returned a dictionairy.
 		// If you're trying to build yiur own module including translations, check out the documentation.
 		return false;
-	},
-
-	// Get formated string, example
-	// stringFormat("%s, %s and %s", ["Me", "myself", "I"]); // "Me, myself and I"
-	stringFormat: function(
-		theString,
-		argumentArray
-	) {
-		var regex = /%s/;
-		var _r = function(
-			p,
-			c
-		) {
-			return p.replace(
-				regex,
-				c
-			);
-		};
-		return argumentArray.reduce(
-			_r,
-			theString
-		);
 	},
 
 	// Define start sequence.
@@ -159,8 +185,8 @@ Module.register("MMM-Weather-SMHI", {
 			config.language
 		);
 
-		this.list = [];
 		this.forecast = [];
+		this.hourlyForecast = [];
 		this.current = null;
 		this.loaded = false;
 		this.scheduleUpdate(
@@ -174,10 +200,14 @@ Module.register("MMM-Weather-SMHI", {
 
 	// Override dom generator.
 	getDom: function() {
+
+		// wrapper is the main container for this weather
 		var wrapper = document.createElement(
 			"div"
 		);
 
+		// check that lon & lat are configured,
+		// and ask for configuration if not set
 		if (
 			this
 				.config
@@ -218,6 +248,7 @@ Module.register("MMM-Weather-SMHI", {
 			return wrapper;
 		}
 
+		// Display "LOADING" if not loaded yet
 		if (
 			!this
 				.loaded
@@ -230,42 +261,40 @@ Module.register("MMM-Weather-SMHI", {
 			return wrapper;
 		}
 
-		// CURRENT
-		var small = document.createElement(
+		// Build CURRENT
+		var current = document.createElement(
+			"div"
+		);
+		current.className =
+			"large light";
+		
+		// Build current wind information
+		var wind = document.createElement(
 			"span"
 		);
-		small.className =
-			"normal medium";
+		wind.className =
+			"medium";
 
+		// Add wind icon
 		var windIcon = document.createElement(
 			"span"
 		);
 		windIcon.className =
-			"wi wi-strong-wind dimmed";
-		small.appendChild(
+			"wi wi-strong-wind";
+		wind.appendChild(
 			windIcon
 		);
 
-		var speed = this
-			.current
-			.wind;
-		if (
+		// get current wind speed w/o decimals
+		var speed = parseFloat(
 			this
-				.config
-				.useBeaufort
-		) {
-			speed = this.ms2Beaufort(
-				this.roundValue(
-					speed
-				)
-			);
-		} else {
-			speed = parseFloat(
-				speed
+				.current
+				.wind
 			).toFixed(
 				0
 			);
-		}
+
+		// create and add the wind speed text, e.g. "5s "
 		var windSpeed = document.createElement(
 			"span"
 		);
@@ -275,34 +304,34 @@ Module.register("MMM-Weather-SMHI", {
 		var windSpeedMark = document.createElement(
 			"sup"
 		);
-		windSpeedMark.innerHTML = this
-			.config
-			.useBeaufort
-			? "b"
-			: "s";
-		small.appendChild(
+		windSpeedMark.innerHTML = "s ";
+		wind.appendChild(
 			windSpeed
 		);
-		small.appendChild(
+		wind.appendChild(
 			windSpeedMark
 		);
 
+		// maybe add wind arrow
 		if (
 			this
 				.config
 				.showWindDirection
 		) {
 			var windDirection = document.createElement(
-				"sup"
+				"span"
 			);
-			windDirection.innerHTML =
-				" " +
-				this.deg2Cardinal(
-					this
-						.current
-						.direction
-				);
-			small.appendChild(
+			windDirection.className =
+				"wi wi-wind from-" +
+					parseFloat(
+						this
+							.current
+							.direction
+					).toFixed(
+						0
+					) +
+				"-deg";
+			wind.appendChild(
 				windDirection
 			);
 		}
@@ -311,24 +340,23 @@ Module.register("MMM-Weather-SMHI", {
 		);
 		spacer.innerHTML =
 			"&nbsp;";
-		small.appendChild(
+		wind.appendChild(
 			spacer
 		);
-		var large = document.createElement(
-			"div"
+		
+		current.appendChild(
+			wind
 		);
-		large.className =
-			"large light";
 
 		var weatherIcon = document.createElement(
 			"span"
 		);
 		weatherIcon.className =
-			"wi weather-icon-large " +
+			"bright wi w-icon-large " +
 			this
 				.current
 				.icon;
-		large.appendChild(
+		current.appendChild(
 			weatherIcon
 		);
 
@@ -343,16 +371,12 @@ Module.register("MMM-Weather-SMHI", {
 				.current
 				.temp +
 			"&deg;";
-		large.appendChild(
+		current.appendChild(
 			temperature
 		);
 
-		large.insertBefore(
-			small,
-			weatherIcon
-		);
 		wrapper.appendChild(
-			large
+			current
 		);
 
 		// FORECAST
@@ -369,6 +393,7 @@ Module.register("MMM-Weather-SMHI", {
 					f
 				];
 
+			// each forecast adds a row
 			var row = document.createElement(
 				"tr"
 			);
@@ -376,6 +401,7 @@ Module.register("MMM-Weather-SMHI", {
 				row
 			);
 
+			// name of day
 			var dayCell = document.createElement(
 				"td"
 			);
@@ -387,59 +413,55 @@ Module.register("MMM-Weather-SMHI", {
 				dayCell
 			);
 
-			var iconCell = document.createElement(
-				"td"
-			);
-			iconCell.className =
-				"bright weather-icon";
-			row.appendChild(
-				iconCell
-			);
-
-			var icon = document.createElement(
-				"span"
-			);
-			icon.className =
-				"wi weathericon " +
-				forecast[0]
-					.icon;
-			iconCell.appendChild(
-				icon
-			);
-
+			// max temp
 			var maxTempCell = document.createElement(
 				"td"
 			);
-			maxTempCell.innerHTML =
-				forecast[0]
-					.temp +
-				"&deg;";
-			maxTempCell.className =
-				"align-right bright max-temp";
+			if (forecast[0].time.diff(moment()) >= 0) {
+				maxTempCell.className =
+					"align-right bright";
+				maxTempCell.innerHTML =
+					forecast[0]
+						.temp +
+					"&deg;";
+			}
+			else {
+				maxTempCell.className =
+					"align-right dimmed";
+				maxTempCell.innerHTML = "";
+			}
 			row.appendChild(
 				maxTempCell
 			);
 
-			iconCell = document.createElement(
+			// the day sky is...
+			var iconCell = document.createElement(
 				"td"
 			);
-			iconCell.className =
-				"weather-icon1";
+			if (forecast[0].time.diff(moment()) >= 0) {
+				iconCell.className =
+					"bright w-icon-small";
+				var icon = document.createElement(
+					"span"
+				);
+				icon.className =
+					"wi weathericon " +
+					forecast[0]
+						.icon;
+				iconCell.appendChild(
+					icon
+				);
+			}
+			else {
+				iconCell.className =
+					"dimmed w-icon-small";
+			}
+
 			row.appendChild(
 				iconCell
 			);
 
-			icon = document.createElement(
-				"span"
-			);
-			icon.className =
-				"wi weather-icon " +
-				forecast[1]
-					.icon;
-			iconCell.appendChild(
-				icon
-			);
-
+			// min temp
 			var minTempCell = document.createElement(
 				"td"
 			);
@@ -448,10 +470,116 @@ Module.register("MMM-Weather-SMHI", {
 					.temp +
 				"&deg;";
 			minTempCell.className =
-				"align-right min-temp";
+				"align-right";
 			row.appendChild(
 				minTempCell
 			);
+
+			// the night sky is...
+			iconCell = document.createElement(
+				"td"
+			);
+			iconCell.className =
+				"w-icon-small";
+			row.appendChild(
+				iconCell
+			);
+
+			icon = document.createElement(
+				"span"
+			);
+			icon.className =
+				"wi weathericon " +
+				forecast[1]
+					.icon;
+			iconCell.appendChild(
+				icon
+			);
+
+			var windSpeedCell = document.createElement(
+				"td"
+			);
+			windSpeedCell.className =
+				"align-right";
+			windSpeedCell.innerHTML =
+				" " +
+				parseFloat(
+					forecast[0]
+						.wind
+				).toFixed(
+					0
+				)
+			var windSpeedMark = document.createElement(
+				"sup"
+			);
+			windSpeedMark.innerHTML = "s ";
+			windSpeedCell.appendChild(
+				windSpeedMark
+			);
+			row.appendChild(
+				windSpeedCell
+			);
+
+			// possibly add wind arrow
+			if (
+				this
+					.config
+					.showWindDirection
+			) {
+				iconCell = document.createElement(
+					"td"
+				);
+				iconCell.className =
+					"w-icon-small";
+				row.appendChild(
+					iconCell
+				);
+				
+				var windDirection = document.createElement(
+					"span"
+				);
+				windDirection.className =
+					"wi wi-wind from-" +
+						parseFloat(
+							forecast[0]
+								.direction
+						).toFixed(
+							0
+						) +
+					"-deg dimmed";
+				iconCell.appendChild(
+					windDirection
+				);
+			}
+			
+			// add rain information
+			var rainCell = document.createElement(
+				"td"
+			);
+
+			var rainUnitMark = document.createElement(
+				"span"
+			);
+			rainUnitMark.className = "mm-unit";
+			rainUnitMark.innerHTML = "mm";
+
+			rainCell.className =
+				"align-right";
+			rainCell.innerHTML =
+				" " +
+				parseFloat(
+					forecast[1]
+						.rainAcc
+				).toFixed(
+					1
+				)
+			rainCell.appendChild(
+				rainUnitMark
+			);
+			row.appendChild(
+				rainCell
+			);
+			
 
 			if (
 				this
@@ -512,12 +640,34 @@ Module.register("MMM-Weather-SMHI", {
 		return wrapper;
 	},
 
+	// Get formated string, example
+	// stringFormat("%s, %s and %s", ["Me", "myself", "I"]); // "Me, myself and I"
+	stringFormat: function(
+		theString,
+		argumentArray
+	) {
+		var regex = /%s/;
+		var _r = function(
+			p,
+			c
+		) {
+			return p.replace(
+				regex,
+				c
+			);
+		};
+		return argumentArray.reduce(
+			_r,
+			theString
+		);
+	},
+
 	/* updateWeather(compliments)
 	 * Requests new data from openweather.org.
 	 * Calls processWeather on succesfull response.
 	 */
 	updateWeather: function() {
-		var url = this.stringFormat(
+ 		var url = this.stringFormat(
 			this
 				.config
 				.url,
@@ -607,12 +757,13 @@ Module.register("MMM-Weather-SMHI", {
 	processWeather: function(
 		data
 	) {
-		this.list = [];
 		this.forecast = [];
+		this.hourlyForecast = [];
 		this.current = null;
 		var closest = 50000;
 		var day = null;
 		var dayIndex = -1;
+		var rainAcc = 0;
 
 		for (
 			var i = 0,
@@ -624,12 +775,15 @@ Module.register("MMM-Weather-SMHI", {
 			count;
 			i++
 		) {
+			
+			// one row of the forecast
 			var forecast =
 				data
 					.timeSeries[
 						i
 					];
-
+					
+			// extract details for this row
 			var item = {
 				time: moment(
 					forecast.validTime
@@ -643,46 +797,35 @@ Module.register("MMM-Weather-SMHI", {
 					"ddd"
 				),
 				icon: this.processWeatherGetItem(
-					"Wsymb",
+					"Wsymb2",
 					forecast
 				),
-				temp: parseFloat(
-					this.roundValue(
-						this.processWeatherGetItem(
-							"t",
-							forecast
-						)
+				temp: parseFloat(	// temperature without decimals
+					this.processWeatherGetItem(
+						"t",
+						forecast
+					).toFixed(
+						0
 					)
 				),
-				wind: parseFloat(
-					this.roundValue(
-						this.processWeatherGetItem(
-							"ws",
-							forecast
-						)
-					)
+				wind: this.processWeatherGetItem(
+					"ws",
+					forecast
 				),
-				direction: parseFloat(
-					this.roundValue(
-						this.processWeatherGetItem(
-							"wd",
-							forecast
-						)
-					)
+				direction: this.processWeatherGetItem(
+					"wd",
+					forecast
 				),
-				cloud: parseFloat(
-					this.roundValue(
-						this.processWeatherGetItem(
-							"tcc_mean",
-							forecast
-						)
-					)
+				rain: this.processWeatherGetItem(
+					"pmean",
+					forecast
 				)
 			};
 
+			// enough parsed? then break!
 			if (
 				item.time.diff(
-					moment(),
+					moment().endOf('day'),
 					"days"
 				) >=
 				this
@@ -692,10 +835,7 @@ Module.register("MMM-Weather-SMHI", {
 				break;
 			}
 
-			this.list.push(
-				item
-			);
-
+			// Item belongs to new day?
 			if (
 				item.day !=
 				day
@@ -703,7 +843,16 @@ Module.register("MMM-Weather-SMHI", {
 				day =
 					item.day;
 				dayIndex++;
+				rainAcc = 0;
 			}
+
+			// Accumulate daily rain
+			rainAcc =
+				rainAcc +
+				parseFloat(
+					item.rain
+				);
+			
 			if (
 				this
 					.forecast[
@@ -716,6 +865,16 @@ Module.register("MMM-Weather-SMHI", {
 				] = [];
 			}
 
+			var hoursFromNow = 
+				item.time.diff(
+					moment(),
+					"hours"
+				)
+				
+			if (hoursFromNow >= 0 && hoursFromNow < 24) {
+				this.hourlyForecast[hoursFromNow] = item;
+			}
+			
 			// Save current (closest to clock)
 			var timeFromNow = Math.abs(
 				item.time.diff(
@@ -771,6 +930,7 @@ Module.register("MMM-Weather-SMHI", {
 				][0] = this.processWeatherCreateItem(
 					0,
 					item,
+					rainAcc,
 					timeFromNowDay
 				);
 				this.forecast[
@@ -778,6 +938,7 @@ Module.register("MMM-Weather-SMHI", {
 				][1] = this.processWeatherCreateItem(
 					1,
 					item,
+					rainAcc,
 					timeFromNowNight
 				);
 			} else {
@@ -794,6 +955,7 @@ Module.register("MMM-Weather-SMHI", {
 					][0] = this.processWeatherCreateItem(
 						0,
 						item,
+						rainAcc,
 						timeFromNowDay
 					);
 				} else if (
@@ -809,13 +971,14 @@ Module.register("MMM-Weather-SMHI", {
 					][1] = this.processWeatherCreateItem(
 						1,
 						item,
+						rainAcc,
 						timeFromNowNight
 					);
 				}
 			}
 		}
 
-		//Log.log(this.forecast);
+//		Log.log(this.forecast);
 
 		this.loaded = true;
 		this.updateDom(
@@ -858,6 +1021,7 @@ Module.register("MMM-Weather-SMHI", {
 	processWeatherCreateItem(
 		index,
 		item,
+		rainAcc,
 		diff
 	) {
 		item.diff = diff;
@@ -872,6 +1036,9 @@ Module.register("MMM-Weather-SMHI", {
 				index
 			];
 		}
+		
+		item.rainAcc = rainAcc;
+		
 		return item;
 	},
 
@@ -907,182 +1074,4 @@ Module.register("MMM-Weather-SMHI", {
 			nextLoad
 		);
 	},
-
-	/* ms2Beaufort(ms)
-	 * Converts m2 to beaufort (windspeed).
-	 *
-	 * argument ms number - Windspeed in m/s.
-	 *
-	 * return number - Windspeed in beaufort.
-	 */
-	ms2Beaufort: function(
-		ms
-	) {
-		var kmh =
-			ms *
-			60 *
-			60 /
-			1000;
-		var speeds = [
-			1,
-			5,
-			11,
-			19,
-			28,
-			38,
-			49,
-			61,
-			74,
-			88,
-			102,
-			117,
-			1000
-		];
-		for (var beaufort in speeds) {
-			var speed =
-				speeds[
-					beaufort
-				];
-			if (
-				speed >
-				kmh
-			) {
-				return beaufort;
-			}
-		}
-		return 12;
-	},
-
-	/* function(temperature)
-	 * Rounds a temperature to 1 decimal.
-	 *
-	 * argument temperature number - Temperature.
-	 *
-	 * return number - Rounded Temperature.
-	 */
-
-	deg2Cardinal: function(
-		deg
-	) {
-		if (
-			deg >
-				11.25 &&
-			deg <=
-				33.75
-		) {
-			return "NNE";
-		} else if (
-			deg >
-				33.75 &&
-			deg <=
-				56.25
-		) {
-			return "NE";
-		} else if (
-			deg >
-				56.25 &&
-			deg <=
-				78.75
-		) {
-			return "ENE";
-		} else if (
-			deg >
-				78.75 &&
-			deg <=
-				101.25
-		) {
-			return "E";
-		} else if (
-			deg >
-				101.25 &&
-			deg <=
-				123.75
-		) {
-			return "ESE";
-		} else if (
-			deg >
-				123.75 &&
-			deg <=
-				146.25
-		) {
-			return "SE";
-		} else if (
-			deg >
-				146.25 &&
-			deg <=
-				168.75
-		) {
-			return "SSE";
-		} else if (
-			deg >
-				168.75 &&
-			deg <=
-				191.25
-		) {
-			return "S";
-		} else if (
-			deg >
-				191.25 &&
-			deg <=
-				213.75
-		) {
-			return "SSW";
-		} else if (
-			deg >
-				213.75 &&
-			deg <=
-				236.25
-		) {
-			return "SW";
-		} else if (
-			deg >
-				236.25 &&
-			deg <=
-				258.75
-		) {
-			return "WSW";
-		} else if (
-			deg >
-				258.75 &&
-			deg <=
-				281.25
-		) {
-			return "W";
-		} else if (
-			deg >
-				281.25 &&
-			deg <=
-				303.75
-		) {
-			return "WNW";
-		} else if (
-			deg >
-				303.75 &&
-			deg <=
-				326.25
-		) {
-			return "NW";
-		} else if (
-			deg >
-				326.25 &&
-			deg <=
-				348.75
-		) {
-			return "NNW";
-		} else {
-			return "N";
-		}
-	},
-
-	roundValue: function(
-		value
-	) {
-		return parseFloat(
-			value
-		).toFixed(
-			this
-				.config
-				.tempDecimals
-		);
-	}
 });

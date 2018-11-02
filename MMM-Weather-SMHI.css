@@ -1,9 +1,4 @@
-.MMM-Weather-SMHI .day {
-  padding-left: 0;
-  padding-right: 25px;
-}
-
-.MMM-Weather-SMHI .weather-icon-large {
+.MMM-Weather-SMHI .w-icon-large {
   font-size: 65%;
   line-height: 65px;
   display: inline-block;
@@ -12,21 +7,21 @@
   transform: translate(0, -3px);
 }
 
-.MMM-Weather-SMHI .weather-icon {
+.MMM-Weather-SMHI .day {
+  padding-left: 0;
+  padding-right: 25px;
+}
+
+.MMM-Weather-SMHI .w-icon-small {
+  text-align: left;
   padding-right: 15px;
-  text-align: center;
-  font-size: 65%;
+  font-size: 80%;
 }
 
-.MMM-Weather-SMHI .weather-icon1 {
-  padding-left: 15px;
-  text-align: center;
+.MMM-Weather-SMHI .mm-unit {
+  font-size: 50%;
 }
 
-.MMM-Weather-SMHI .min-temp {
-  padding-right: 0;
-}
-
-.MMM-Weather-SMHI header {
+.MMM-Weather-SMHI .header {
   padding-top: 15px;
 }
