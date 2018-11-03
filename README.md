@@ -32,10 +32,15 @@ The following properties can be configured:
 |`lon` |The location longitude for weather information.| xx.xxxx                                                  | |
 |`lat` |The location latitude for weather information. | yy.yyyy                                                  | |
 |`units`|What units to use. Specified by config.js - config.units | Kelvin, metric (Celsius), imperial (Fahrenheit)|*config.units* or Kelvin |
-|`maxNumberOfDays`| How many days of forecast to return. Specified by config.js | 1-16 | 5days |
+|`maxNumberOfDays`| How many days of forecast to return. Specified by config.js | 1-16 | 5 days |
 |`updateInterval`| How often does the content needs to be fetched? (Milliseconds) | 1000-86400000 | 300000(10 minutes) |
 |`animationSpeed`| Speed of the update animation. (Milliseconds)  | 0-5000 | 2000(2 seconds) |
 |`useBeaufort`| Pick between using the Beaufort scale for wind speed or using the default units. | true, false | true |
+|`showWindDirection`| Shows the wind direction after the wind speed. | true, false | false |
+|`windDirectionMode`| Showing wind direction using text (e.g. NNE) or arrow. | 0 = text, 1 = arrow | 0 |
+|`showDailyWindInfo`| Showing wind information per day. | true, false | false |
+|`showDailyRainInfo`| Showing rain information per day. | true, false | false |
+|`tempDecimals'| The number of decimals to use for temperature. | 0, 1 | 1 |
 |`lang`| The language of the days. | en, nl, ru, etc... | *config.language* |
 |`fade`| Fade the future events to black. (Gradient) | true, false | true |
 |`fadePoint`| Where to start fade? | 0-1 (0=top of list, 1=bottom of list) | 0,25 |
