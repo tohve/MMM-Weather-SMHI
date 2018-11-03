@@ -39,7 +39,6 @@ The following properties can be configured:
 |`lang`| The language of the days. | en, nl, ru, etc... | *config.language* |
 |`fade`| Fade the future events to black. (Gradient) | true, false | true |
 |`fadePoint`| Where to start fade? | 0-1 (0=top of list, 1=bottom of list) | 0,25 |
-|`tempDecimals`| The number of decimals to use when displaying temperature | 0, 1 | 1 |
 |`initialLoadDelay`| The initial delay before loading. If you have multiple modules that use the same API key, you might want to delay one of the requests. (Milliseconds) | 1000-5000 | 0 |
 |`retryDelay`| The delay before retrying after a request failure. (Milliseconds) | 1000-60000 | 2500 |
 |`title`| Title of the weather table. | Text | Weather Forecast |
