@@ -42,9 +42,6 @@ Module.register("MMM-Weather-SMHI", {
 		initialLoadDelay: 2500, // 2.5 seconds delay. This delay is used to keep the OpenWeather API happy.
 		retryDelay: 2500,
 
-<<<<<<< HEAD
-		// Mapping of SMHI Wsymb2 to an actual weather icon
-=======
 		wdirDegreeToText: [
 			"N", "NNE", "NE", "ENE",
 			"E", "ESE", "SE", "SSE",
@@ -53,7 +50,7 @@ Module.register("MMM-Weather-SMHI", {
 			"N"
 		],
 		
->>>>>>> winddirection
+		// Mapping of SMHI Wsymb2 to an actual weather icon
 		iconTable: {
 			1: [	// SMHI: Clear sky
 				"wi-day-sunny",
